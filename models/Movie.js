@@ -10,5 +10,5 @@ const movieSchema = new Schema({
     runTimeMins: Number,
     imDbRating: Number
 }, {timestamps:true});
-const Movie = mongoose.model('Video', movieSchema);
+const Movie = mongoose.model('Movie', movieSchema);
 module.exports = Movie;

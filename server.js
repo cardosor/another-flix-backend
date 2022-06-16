@@ -1,35 +1,27 @@
 //Imports
 require('dotenv').config();
 const express = require('express');
-const mongoose = require('mongoose');
+require('./config/database');
 const app = express();
-
 //PORT
 const port = 8080;
 
-//=====Connection to DB =====
-// mongoose.connect(process.env.MONGO_URI, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-// });
-// mongoose.connection.once('open', () => {
-//     console.log('Connected to mongo');
-// })
-
-//Setup Engine
-app.use(express.static(__dirname+'/public'));
-
-app.use(express.urlencoded({extended:false}));
-
+//========== Middleware =============
+app.use(express.urlencoded({ extended: false }));
 //Use express middleware to parse JSON
 app.use(express.json());
 
+app.use((req, res, next) => {
+    console.log('I run for all the routes.');
+    next();
+});
+
+
 //======ROUTES
+//Movies
+app.use('/api/v1/movies', require('./routes/api/movies'));
 
-//INDUCES
-// app.get('/', (res, req)=>{
-//     res.send({hello:"hello"});
-// });
+//Users
+app.use('/api/v1/users', require('./routes/api/users'));
 
-
-app.listen(port, () =>console.log(`Listening to port ${port}`));
+app.listen(port, () => console.log(`Listening to port ${port}`));
