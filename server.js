@@ -16,12 +16,18 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use(require('./config/checkToken'));
+
 
 //======ROUTES
-//Movies
-app.use('/api/v1/movies', require('./routes/api/movies'));
-
 //Users
 app.use('/api/v1/users', require('./routes/api/users'));
+
+//Protect API routes bellow from anuthorized users
+const ensureLoggedIn = require('./config/ensureLoggedIn');
+//Movies
+app.use('/api/v1/movies', ensureLoggedIn, require('./routes/api/movies'));
+
+
 
 app.listen(port, () => console.log(`Listening to port ${port}`));

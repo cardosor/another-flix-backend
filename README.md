@@ -13,12 +13,16 @@ DATE | PROGRESS | BLOCKERS | GOALS |
 
 06/15/2022 | CRUD on movies and users. Populating Favorites | None | Auth |
 
+06/16/2022 | Auth functioning | None | Stretch golas |
+
 ## Technologies
 
 *** 
 
 1. Express
 2. Mongoose
+3. bcrypt
+4. jsonwebtoken
 
 ## Stretch Goals
 
